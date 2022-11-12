@@ -63,3 +63,4 @@ Makefile
 #VS files & folder
 *.sln
 *.vcxproj
+*.user
