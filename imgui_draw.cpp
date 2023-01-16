@@ -3112,8 +3112,7 @@ ImFont::ImFont()
     FallbackAdvanceX = 0.0f;
     FallbackChar = (ImWchar)-1;
     EllipsisChar = (ImWchar)-1;
-    EllipsisWidth = EllipsisCharStep = 0.0f;
-    EllipsisCharCount = 0;
+    DotChar = (ImWchar)-1;
     FallbackGlyph = NULL;
     ContainerAtlas = NULL;
     ConfigData = NULL;
@@ -3201,20 +3200,8 @@ void ImFont::BuildLookupTable()
     const ImWchar dots_chars[] = { (ImWchar)'.', (ImWchar)0xFF0E };
     if (EllipsisChar == (ImWchar)-1)
         EllipsisChar = FindFirstExistingGlyph(this, ellipsis_chars, IM_ARRAYSIZE(ellipsis_chars));
-    const ImWchar dot_char = FindFirstExistingGlyph(this, dots_chars, IM_ARRAYSIZE(dots_chars));
-    if (EllipsisChar != (ImWchar)-1)
-    {
-        EllipsisCharCount = 1;
-        EllipsisWidth = EllipsisCharStep = FindGlyph(EllipsisChar)->X1;
-    }
-    else if (dot_char != (ImWchar)-1)
-    {
-        const ImFontGlyph* glyph = FindGlyph(dot_char);
-        EllipsisChar = dot_char;
-        EllipsisCharCount = 3;
-        EllipsisCharStep = (glyph->X1 - glyph->X0) + 1.0f;
-        EllipsisWidth = EllipsisCharStep * 3.0f - 1.0f;
-    }
+    if (DotChar == (ImWchar)-1)
+        DotChar = FindFirstExistingGlyph(this, dots_chars, IM_ARRAYSIZE(dots_chars));
 
     // Setup fallback character
     const ImWchar fallback_chars[] = { (ImWchar)IM_UNICODE_CODEPOINT_INVALID, (ImWchar)'?', (ImWchar)' ' };
