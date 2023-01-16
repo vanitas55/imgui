@@ -54,3 +54,16 @@ examples/example_sdl_metal/example_sdl_metal
 examples/example_sdl_opengl2/example_sdl_opengl2
 examples/example_sdl_opengl3/example_sdl_opengl3
 examples/example_sdl_sdlrenderer/example_sdl_sdlrenderer
+
+##GEL_Core
+#Directories
+bin/
+bin-int/
+
+#Files
+Makefile
+
+#VS files & folder
+*.sln
+*.vcxproj
+*.user
