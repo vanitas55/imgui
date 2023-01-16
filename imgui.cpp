@@ -1288,7 +1288,8 @@ void ImGuiIO::AddInputCharactersUTF8(const char* utf8_chars)
     {
         unsigned int c = 0;
         utf8_chars += ImTextCharFromUtf8(&c, utf8_chars, NULL);
-        AddInputCharacter(c);
+        if (c != 0)
+            AddInputCharacter(c);
     }
 }
 
@@ -2031,6 +2032,8 @@ int ImTextStrFromUtf8(ImWchar* buf, int buf_size, const char* in_text, const cha
     {
         unsigned int c;
         in_text += ImTextCharFromUtf8(&c, in_text, in_text_end);
+        if (c == 0)
+            break;
         *buf_out++ = (ImWchar)c;
     }
     *buf_out = 0;
@@ -2046,6 +2049,8 @@ int ImTextCountCharsFromUtf8(const char* in_text, const char* in_text_end)
     {
         unsigned int c;
         in_text += ImTextCharFromUtf8(&c, in_text, in_text_end);
+        if (c == 0)
+            break;
         char_count++;
     }
     return char_count;
